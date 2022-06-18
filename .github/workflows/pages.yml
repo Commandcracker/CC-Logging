@@ -27,7 +27,9 @@ jobs:
           bin/illuaminate doc-gen
 
       - name: Fix search index
-        run: sed -i 's/\/index.json/\/CC-Logging\/index.json/g' _site/main.js
+        run: |
+          sed -i 's/\/index.json/\/CC-Logging\/index.json/g' _site/main.js
+          sed -i 's/href = `/href = `\/CC-Logging/g' _site/main.js
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
