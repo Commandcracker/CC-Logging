@@ -48,12 +48,12 @@ end
 
 --[[- Formats a Record instance to a string.
     - fmt placeholders: 
-        - %(name)s        Name of the logger
-        - %(levelname)s   Name of the Log level
-        - %(message)s     The Message to log
-        - %(time)s        The real live time formatted by datefmt
-        - %(localtime)s   The minecraft time formatted by datefmt
-        - %(day)s         The minecraft day
+        - %(name)        Name of the logger
+        - %(levelname)   Name of the Log level
+        - %(message)     The Message to log
+        - %(time)        The real live time formatted by datefmt
+        - %(localtime)   The minecraft time formatted by datefmt
+        - %(day)         The minecraft day
     - datefmt works like the format in [os.date()](https://tweaked.cc/module/os.html#v:date)
     @type Formatter
 ]]
