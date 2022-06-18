@@ -464,34 +464,60 @@ end
 
 local rootLogger = Logger.new("root")
 
-return {
-    --- logs a message at the debug level
-    -- @tparam string ... The arguments to log
-    debug                  = rootLogger.debug,
-    --- logs a message at the info level
-    -- @tparam string ... The arguments to log
-    info                   = rootLogger.info,
-    --- logs a message at the warn level
-    -- @tparam string ... The arguments to log
-    warn                   = rootLogger.warn,
-    --- logs a message at the error level
-    -- @tparam string ... The arguments to log
-    error                  = rootLogger.error,
-    --- logs a message at the critical level
-    -- @tparam string ... The arguments to log
-    critical               = rootLogger.critical,
-    --- logs a message
-    -- @tparam Level level the level of the message
-    -- @tparam string ... The arguments to log
-    log                    = rootLogger.log,
-    --- Hols the levels of the root logger
-    levels                 = rootLogger.levels,
-    Level                  = Level,
-    Record                 = Record,
-    Formatter              = Formatter,
-    ColordWebsocketHandler = ColordWebsocketHandler,
-    FileHandler            = FileHandler,
-    TerminalHandler        = TerminalHandler,
-    Logger                 = Logger,
-    RednetHandler          = RednetHandler,
-}
+local logging = {}
+
+--- logs a message at the debug level
+-- @tparam string ... The arguments to log
+function logging.debug(...)
+    rootLogger:debug(...)
+end
+
+--- logs a message at the info level
+-- @tparam string ... The arguments to log
+function logging.info(...)
+    rootLogger:info(...)
+end
+
+--- logs a message at the warn level
+-- @tparam string ... The arguments to log
+function logging.warn(...)
+    rootLogger:warn(...)
+end
+
+--- logs a message at the error level
+-- @tparam string ... The arguments to log
+function logging.error(...)
+    rootLogger:error(...)
+end
+
+--- logs a message at the critical level
+-- @tparam string ... The arguments to log
+function logging.critical(...)
+    rootLogger:critical(...)
+end
+
+--- logs a message
+-- @tparam Level level the level of the message
+-- @tparam string ... The arguments to log
+function logging.log(level, ...)
+    rootLogger:log(level, ...)
+end
+
+--- Hols the levels of the root logger
+logging.levels = rootLogger.levels
+
+-- Classes
+logging.Level     = Level
+logging.Record    = Record
+logging.Formatter = Formatter
+logging.Logger    = Logger
+
+-- Handlers
+logging.TerminalHandler        = TerminalHandler
+logging.FileHandler            = FileHandler
+logging.WebsocketHandler       = WebsocketHandler
+logging.ColordWebsocketHandler = ColordWebsocketHandler
+logging.RawWebsocketHandler    = RawWebsocketHandler
+logging.RednetHandler          = RednetHandler
+
+return logging
