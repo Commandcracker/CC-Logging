@@ -3,7 +3,7 @@ name: GitHub Pages
 on:
   push:
     branches:
-    - dev
+    - main
 
 jobs:
   build:
@@ -16,17 +16,6 @@ jobs:
         fetch-depth: 0
 
     - uses: leafo/gh-actions-lua@v8.0.0
-
-    # I'm so sorry for the following perl command.
-    - name: Generate index.md
-      run: |
-        bin/mk-loader.lua loader.lua
-        perl -i -pe "s/%LOADER%/$(sed -e 's/[\/&]/\\&/g' loader.lua)/g" doc/notes/usage.md
-
-    - name: Generate repositories
-      run: |
-        bin/mk-repo.lua packman ./_site/packlist
-        bin/mk-repo.lua ccpt ./_site/ccpt.json
 
     - name: Generate documentation
       run: |
