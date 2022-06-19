@@ -116,7 +116,11 @@ function Formatter:format(record)
     temp = temp:gsub("%%%(localtime%)", os.date(self.datefmt, record.localtime))
     temp = temp:gsub("%%%(day%)", record.day)
     temp = temp:gsub("%%%(computerid%)", record.computerid)
-    temp = temp:gsub("%%%(computerlabel%)", record.computerlabel)
+    if record.computerlabel then
+        temp = temp:gsub("%%%(computerlabel%)", record.computerlabel)
+    else
+        temp = temp:gsub("%%%(computerlabel%)", "")
+    end
     return temp
 end
 
