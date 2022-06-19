@@ -247,9 +247,9 @@ local function convertTrueColor(color)
         r, g, b = 127, 204, 25
     elseif color == colours.pink then
         r, g, b = 242, 178, 204
-    elseif color == colours.gray then
+    elseif color == colours.grey then
         r, g, b = 76, 76, 76
-    elseif color == colours.lightGray then
+    elseif color == colours.lightGrey then
         r, g, b = 153, 153, 153
     elseif color == colours.cyan then
         r, g, b = 76, 153, 178
@@ -294,9 +294,9 @@ local function convertForgroundColor(color)
         code = 92
     elseif color == colours.pink then
         code = 35
-    elseif color == colours.gray then
+    elseif color == colours.grey then
         code = 37
-    elseif color == colours.lightGray then
+    elseif color == colours.lightGrey then
         code = 90
     elseif color == colours.cyan then
         code = 36
@@ -340,9 +340,9 @@ local function convertBackgroundColor(color)
         code = 102
     elseif color == colours.pink then
         code = 45
-    elseif color == colours.gray then
+    elseif color == colours.grey then
         code = 47
-    elseif color == colours.lightGray then
+    elseif color == colours.lightGrey then
         code = 100
     elseif color == colours.cyan then
         code = 46
