@@ -476,7 +476,7 @@ end
 --- Handles a record.
 -- @tparam Record record The record to handle.
 function TerminalHandler:handle(record)
-    local old_text_colour = term.getTextColor()
+    local old_text_colour       = term.getTextColor()
     local old_background_colour = term.getBackgroundColor()
 
     term.setTextColor(record.level.textcolor)
