@@ -19,17 +19,24 @@ jobs:
       - name: Install Lua
         uses: leafo/gh-actions-lua@v9
 
-      - name: Generate documentation
+      - name: Install Illuaminate
         run: |
           test -d bin || mkdir bin
           test -f bin/illuaminate || wget -q -Obin/illuaminate https://squiddev.cc/illuaminate/linux-x86-64/illuaminate
           chmod +x bin/illuaminate
-          bin/illuaminate doc-gen
+
+      - name: Generate documentation
+        run: bin/illuaminate doc-gen
 
       - name: Fix search index
         run: |
           sed -i 's/\/index.json/\/CC-Logging\/index.json/g' _site/main.js
           sed -i 's/href = `/href = `\/CC-Logging/g' _site/main.js
+
+      - name: Minify source code
+        run: |
+          find src -type d -exec sh -c "mkdir -p _site/min\$(echo {} | awk '{print substr(\$0,4)}')" \;
+          find src -type f -exec sh -c "bin/illuaminate minify {} > _site/min\$(echo {} | awk '{print substr(\$0,4)}')" \;
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
