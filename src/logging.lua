@@ -273,13 +273,12 @@ local function convertTrueColor(color)
     return r, g, b
 end
 
+--[[
 local function convertForgroundColor(color)
-    --[[
-        3-bit and 4-bit Colors
-        https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit
-        Note: Some colors like pink and purple need to share the same color code.
-        Note: Colors are not acurate, they vary on your os and terminal settings.
-    ]]
+    -- 3-bit and 4-bit Colors
+    -- https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit
+    -- Note: Some colors like pink and purple need to share the same color code.
+    -- Note: Colors are not acurate, they vary on your os and terminal settings.
 
     local code
 
@@ -321,12 +320,11 @@ local function convertForgroundColor(color)
 end
 
 local function convertBackgroundColor(color)
-    --[[
-        3-bit and 4-bit Colors
-        https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit
-        Note: Some colors like pink and purple need to share the same color code.
-        Note: Colors are not acurate, they vary on your os and terminal settings.
-    ]]
+    -- 3-bit and 4-bit Colors
+    -- https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit
+    -- Note: Some colors like pink and purple need to share the same color code.
+    -- Note: Colors are not acurate, they vary on your os and terminal settings.
+
     local code
 
     if color == colours.white then
@@ -365,6 +363,7 @@ local function convertBackgroundColor(color)
 
     return code
 end
+]]
 
 --[[- Will send the formatted record message with [ansi escape codes (for the color)](https://en.wikipedia.org/wiki/ANSI_escape_code#Colors) to a websocket.
     @type ColordWebsocketHandler
