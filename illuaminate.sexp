@@ -16,7 +16,7 @@
    (dynamic-modules)
    
    ;; List of global variables
-   (globals :max term colours write rednet)
+   (globals :max term colors write rednet)
    
    ;; Whether tables entries should be separated by a comma (',') or semicolon (';').
    (table-separator comma)
