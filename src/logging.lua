@@ -108,7 +108,8 @@ end
 -- @tparam Record record The record to format
 -- @treturn string The formatted string
 function Formatter:format(record)
-    temp = self.fmt
+    local temp = self.fmt
+
     temp = temp:gsub("%%%(name%)", record.name)
     temp = temp:gsub("%%%(levelname%)", record.level.name)
     temp = temp:gsub("%%%(message%)", record.message)
@@ -116,11 +117,13 @@ function Formatter:format(record)
     temp = temp:gsub("%%%(localtime%)", os.date(self.datefmt, record.localtime))
     temp = temp:gsub("%%%(day%)", record.day)
     temp = temp:gsub("%%%(computerid%)", record.computerid)
+
     if record.computerlabel then
         temp = temp:gsub("%%%(computerlabel%)", record.computerlabel)
     else
         temp = temp:gsub("%%%(computerlabel%)", "")
     end
+
     return temp
 end
 
