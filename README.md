@@ -114,7 +114,7 @@ end
 
 blankLine()
 
-local level = logging.Level.new("CUSTOM", nil, colours.black, colours.white)
+local level = logging.Level.new("CUSTOM", nil, colors.black, colors.white)
 logger:log(level, "custom level")
 
 blankLine()
@@ -128,13 +128,13 @@ custom_logger:info("custom formatter")
 
 blankLine()
 
-for k, v in pairs(colours) do
+for k, v in pairs(colors) do
     if type(v) == "number" then
         local _level
-        if v == colours.black then
-            _level = logging.Level.new(k:gsub("^%l", k.upper), 20, v, colours.white)
+        if v == colors.black then
+            _level = logging.Level.new(k:gsub("^%l", k.upper), 20, v, colors.white)
         else
-            _level = logging.Level.new(k:gsub("^%l", k.upper), 20, v, colours.black)
+            _level = logging.Level.new(k:gsub("^%l", k.upper), 20, v, colors.black)
         end
         logger:log(_level, k, v)
     end
