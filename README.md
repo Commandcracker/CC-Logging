@@ -15,8 +15,8 @@ An logging library for Computer Craft
 look at the [Documentation](https://commandcracker.github.io/CC-Logging/) for moor help and please remind that the documentation is incomplete.
 
 ```lua
-local logging = dofile("logging.lua")
-local logger = logging.Logger.new(shell.getRunningProgram())
+local logging = require("logging")
+local logger  = logging.Logger.new(shell.getRunningProgram())
 
 logger:debug("debug message")
 logger:info("info message")
@@ -65,11 +65,11 @@ logger:info("Message Handeld by Custom Handler")
 
 ### Server
 
-<img src="images/ws_server.png" alt="drawing" width="640" height="320"/>
+![ws_server](images/ws_server.png)
 
 ```js
 const WebSocket = require('ws');
-const server = new WebSocket.Server({
+const server    = new WebSocket.Server({
     port: 8080
 });
 
@@ -92,7 +92,7 @@ server.on('connection', function (socket) {
 
 ### Client
 
-<img src="images/ws_client.png" alt="drawing" width="640" height="320"/>
+![ws_client](images/ws_client.png)
 
 ```lua
 local logging          = require("logging")
@@ -100,6 +100,8 @@ local logger           = logging.Logger.new(shell.getRunningProgram())
 local websocket        = http.websocket("ws://127.0.0.1:8080")
 local websocketHandler = logging.ColordWebsocketHandler.new(logger.formatter, websocket)
 logger:addHandler(websocketHandler)
+
+-- Default log Levels
 
 logger:debug("logging.debug")
 logger:info("logging.info")
@@ -112,10 +114,14 @@ local function blankLine()
     print()
 end
 
+-- Custom Level
+
 blankLine()
 
 local level = logging.Level.new("CUSTOM", nil, colors.black, colors.white)
 logger:log(level, "custom level")
+
+-- Custom Formatter
 
 blankLine()
 
@@ -125,6 +131,8 @@ local custom_websocketHandler = logging.ColordWebsocketHandler.new(formatter, we
 custom_logger:addHandler(custom_websocketHandler)
 
 custom_logger:info("custom formatter")
+
+-- All Colors as log Levels
 
 blankLine()
 
