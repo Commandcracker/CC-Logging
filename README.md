@@ -34,14 +34,12 @@ local logger  = logging.Logger.new(shell.getRunningProgram())
 local CustomHandler = {}
 
 function CustomHandler.new(formatter)
-    local instance     = setmetatable({}, { __index = CustomHandler })
-    instance.formatter = formatter
-    return instance
+    return setmetatable({ formatter = formatter }, { __index = CustomHandler })
 end
 
 function CustomHandler:handle(record)
-    local old_text_colour       = term.getTextColor()
-    local old_background_colour = term.getBackgroundColor()
+    local old_text_color       = term.getTextColor()
+    local old_background_color = term.getBackgroundColor()
 
     term.setTextColor(record.level.textcolor)
     term.setBackgroundColor(record.level.backgroundcolor)
@@ -50,8 +48,8 @@ function CustomHandler:handle(record)
     record.message = string.reverse(record.message)
     write(self.formatter:format(record))
 
-    term.setTextColor(old_text_colour)
-    term.setBackgroundColor(old_background_colour)
+    term.setTextColor(old_text_color)
+    term.setBackgroundColor(old_background_color)
 
     write("\n")
 end
@@ -118,15 +116,27 @@ end
 
 blankLine()
 
-local level = logging.Level.new("CUSTOM", nil, colors.black, colors.white)
+local level = logging.Level.new {
+    name            = "CUSTOM",
+    textcolor       = colors.black,
+    backgroundcolor = colors.white
+}
 logger:log(level, "custom level")
 
 -- Custom Formatter
 
 blankLine()
 
-local formatter               = logging.Formatter.new("[%(time) %(name) %(levelname)] %(message)", "%Y-%m-%d %H:%M:%S")
-local custom_logger           = logging.Logger.new(shell.getRunningProgram(), nil, formatter)
+local formatter = logging.Formatter.new(
+    "[%(time) %(name) %(levelname)] %(message)",
+    "%Y-%m-%d %H:%M:%S"
+)
+
+local custom_logger = logging.Logger.new {
+    name      = shell.getRunningProgram(),
+    formatter = formatter
+}
+
 local custom_websocketHandler = logging.ColordWebsocketHandler.new(formatter, websocket)
 custom_logger:addHandler(custom_websocketHandler)
 
@@ -136,15 +146,18 @@ custom_logger:info("custom formatter")
 
 blankLine()
 
-for k, v in pairs(colors) do
-    if type(v) == "number" then
-        local _level
-        if v == colors.black then
-            _level = logging.Level.new(k:gsub("^%l", k.upper), 20, v, colors.white)
-        else
-            _level = logging.Level.new(k:gsub("^%l", k.upper), 20, v, colors.black)
-        end
-        logger:log(_level, k, v)
+for key, value in pairs(colors) do
+    if type(value) == "number" then
+        logger:log(
+            logging.Level.new(
+                key:gsub("^%l", key.upper),
+                20,
+                value,
+                value == colors.black and colors.white or colors.black
+            ),
+            key,
+            value
+        )
     end
 end
 
