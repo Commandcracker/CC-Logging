@@ -8,7 +8,7 @@
 (at /
  ;; Modifications to make to the linter set. For instance, `+all -var:unused`
  ;; will enable all warnings but var:unused.
- (linters all)
+ (linters -format:table-trailing)
  
  ;; Control how the illuaminate linter works.
  (lint
